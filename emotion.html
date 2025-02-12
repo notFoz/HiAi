@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        :root {
+            --primary-red: #ff6b6b;
+            --primary-blue: #4ecdc4;
+            --primary-green: #95e1d3;
+            --text-dark: #2d3436;
+            --text-light: #f5f6fa;
+            --background-light: #ffffff;
+            --background-dark: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--background-light); /* Change to match the background color of index.html */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        body.dark-mode {
+            background: var(--background-dark);
+            color: var(--text-light);
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .emotions-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .emotion-btn {
+            padding: 8px 20px;
+            background-color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .emotion-btn:hover {
+            transform: translateY(-2px);
+            background-color: #f0f0f0;
+        }
+
+        .display-area {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .sidebar-item {
+            background-color: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            width: 150px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .code-display {
+            margin-top: 20px;
+            font-family: monospace;
+            color: #666;
+        }
+
+        .nav-button {
+            position: fixed;
+            padding: 12px 24px;
+            border-radius: 20px;
+            background: #ff0000;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+            z-index: 100;
+            bottom: 20px;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            background: #e60000;
+        }
+
+        .nav-button.prev {
+            left: 20px;
+        }
+
+        .nav-button.next {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="intro-text">
+            Hey kids! Have you ever felt a certain way but didn't know exactly what to call it?<br>
+            That's okay! Understanding our feelings can sometimes be tricky, but don't worry,<br>
+            we can practice together. Let's play a little game to help us figure out different emotions:
+        </p>
+
+        <div class="emotions-container">
+            <button class="emotion-btn" onclick="showEmotion('Happy')">Happy</button>
+            <button class="emotion-btn" onclick="showEmotion('Angry')">Angry</button>
+            <button class="emotion-btn" onclick="showEmotion('Neutral')">Neutral</button>
+            <button class="emotion-btn" onclick="showEmotion('Excited')">Excited</button>
+            <button class="emotion-btn" onclick="showEmotion('Scared')">Scared</button>
+        </div>
+
+        <div class="display-area" id="display-area"></div>
+
+        <div class="code-display" id="code-display"></div>
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-item">
+            <img src="qrcode_170826100_f3ce85e27e9a3eec1195b7ac4bc96864.png" alt="QR Code" style="width: 100%; height: auto; margin-bottom: 10px;">
+            Crazy Face AI
+        </div>
+        <div class="sidebar-item">jungGPT</div>
+    </div>
+
+    <a href="introduction.html" class="nav-button prev">BACK</a>
+    <a href="About Page.html" class="nav-button next">NEXT</a>
+
+    <script>
+        function showEmotion(emotion) {
+            const displayArea = document.getElementById('display-area');
+            const codeDisplay = document.getElementById('code-display');
+            displayArea.innerHTML = ''; // Clear previous content
+
+            const img = document.createElement('img');
+            img.style.maxWidth = '100%';
+            img.style.borderRadius = '20px';
+
+            let codeText = '';
+
+            switch (emotion) {
+                case 'Happy':
+                    img.src = 'Happy Emotion.jpg'; // Path to your Happy image
+                    img.alt = 'Happy Emotion';
+                    codeText = 'You are feeling Happy!';
+                    break;
+                case 'Angry':
+                    img.src = 'Angry Emotion.jpg'; // Path to your Angry image
+                    img.alt = 'Angry Emotion';
+                    codeText = 'You are feeling Angry!';
+                    break;
+                case 'Neutral':
+                    img.src = 'Neutral Emotion.jpg'; // Path to your Neutral image
+                    img.alt = 'Neutral Emotion';
+                    codeText = 'You are feeling Neutral!';
+                    break;
+                case 'Excited':
+                    img.src = 'Excited Emotion.jpg'; // Path to your Excited image
+                    img.alt = 'Excited Emotion';
+                    codeText = 'You are feeling Excited!';
+                    break;
+                case 'Scared':
+                    img.src = 'Scared Emotion.jpg'; // Path to your Scared image
+                    img.alt = 'Scared Emotion';
+                    codeText = 'You are feeling Scared!';
+                    break;
+                default:
+                    img.src = '';
+                    img.alt = '';
+                    codeText = '';
+            }
+
+            displayArea.appendChild(img);
+            codeDisplay.textContent = codeText;
+        }
+    </script>
+</body>
+</html>
