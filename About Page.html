@@ -8,28 +8,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-red: #ff0000;
-            --primary-blue: #0000ff;
-            --primary-green: #00ff00;
+            --primary-red: #ff6b6b;
+            --primary-blue: #4ecdc4;
+            --primary-green: #95e1d3;
             --text-dark: #2d3436;
-            --text-white: #ffffff;
+            --text-light: #f5f6fa;
             --background-dark: #2d3436;
-            --background-light: #ffffff;
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --background-light: #f8f9fa;
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             --transition-speed: 0.3s;
+            --font-primary: 'Poppins', sans-serif;
         }
 
-        * {
+        * { 
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-            line-height: 1.6;
+            font-family: var(--font-primary), Arial, sans-serif;
             background: var(--background-light);
             color: var(--text-dark);
+            line-height: 1.6;
             transition: background var(--transition-speed), color var(--transition-speed);
         }
 
@@ -41,45 +42,50 @@
 
         .header {
             text-align: center;
-            margin-bottom: 60px;
-            padding: 40px 0;
-            background: linear-gradient(135deg, var(--primary-red), var(--primary-blue));
-            color: var(--text-white);
+            padding: 50px 20px;
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-blue), var(--primary-green));
+            color: var(--text-light);
+            border-radius: 0 0 50px 50px;
+            box-shadow: var(--card-shadow);
         }
 
         .header h1 {
-            font-size: clamp(28px, 4vw, 40px);
-            margin-bottom: 20px;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 15px;
         }
 
         .header p {
-            font-size: clamp(16px, 2.5vw, 18px);
+            font-size: clamp(16px, 2.5vw, 20px);
             max-width: 800px;
             margin: 0 auto;
             opacity: 0.9;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
         }
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 40px;
         }
 
         .team-member {
-            background: var(--background-light);
-            border-radius: 12px;
+            background: var(--text-light);
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
-            transition: transform var(--transition-speed);
+            text-align: center;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         .team-member:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         .member-photo {
-            width: 100%;
+            position: relative;
             height: 300px;
             overflow: hidden;
         }
@@ -92,7 +98,7 @@
         }
 
         .team-member:hover .member-photo img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .member-info {
@@ -100,42 +106,58 @@
         }
 
         .member-info h3 {
-            font-size: 20px;
-            margin-bottom: 5px;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
             color: var(--text-dark);
         }
 
         .member-info .university {
             font-size: 16px;
             color: #666;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .member-info .course {
-            font-size: 14px;
-            color: var(--primary-green);
+            font-size: 15px;
             font-weight: 500;
+            color: var(--primary-green);
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            font-size: 18px;
+            color: var(--primary-blue);
+            margin: 0 10px;
+            transition: color var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-red);
         }
 
         .nav-button {
             position: fixed;
-            padding: 12px 24px;
-            border-radius: 20px;
+            padding: 15px 30px;
+            border-radius: 25px;
             background: var(--primary-red);
-            color: var(--text-white);
+            color: var(--text-light);
             border: none;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-speed), background var(--transition-speed);
             text-decoration: none;
-            font-weight: 600;
-            transition: transform var(--transition-speed);
             z-index: 100;
-            bottom: 20px;
+            bottom: 30px;
         }
 
         .nav-button:hover {
-            transform: translateY(-2px);
-            background: #e60000;
+            transform: translateY(-3px);
+            background: #ff3d3d;
         }
 
         .nav-button.prev {
@@ -151,17 +173,19 @@
             top: 50%;
             left: 20px;
             transform: translateY(-50%);
-            padding: 10px 20px;
+            padding: 12px 20px;
             background: var(--primary-blue);
-            color: var(--text-white);
+            color: var(--text-light);
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background var(--transition-speed);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background var(--transition-speed), transform var (--transition-speed);
         }
 
         .theme-toggle:hover {
-            background: #0000cc;
+            background: #0056b3;
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
@@ -170,8 +194,8 @@
             }
 
             .team-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             }
 
             .member-photo {
@@ -190,57 +214,73 @@
 
     <main class="container">
         <div class="team-grid">
-            <!-- Team Member 1 -->
+            <!-- Member 1 -->
             <div class="team-member">
                 <div class="member-photo">
-                    <img src="/api/placeholder/300/300" alt="Team member 1">
+                    <img src="images/Nikhil.jpg" alt="Team member 1">
                 </div>
                 <div class="member-info">
-                    <h3>Sarah Johnson</h3>
-                    <div class="university">University of Technology Sydney</div>
-                    <div class="course">Bachelor of Computing Science</div>
+                    <h3>Nikhil Manoj</h3>
+                    <div class="university">University of Technology Bahrain</div>
+                    <div class="course">Mechatronics Engineering</div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Team Member 2 -->
+            <!-- Member 2 -->
             <div class="team-member">
                 <div class="member-photo">
-                    <img src="/api/placeholder/300/300" alt="Team member 2">
+                    <img src="images/Nizin.jpg" alt="Team member 2">
                 </div>
                 <div class="member-info">
-                    <h3>Michael Chen</h3>
-                    <div class="university">University of Technology Sydney</div>
-                    <div class="course">Bachelor of Information Technology</div>
+                    <h3>Muhammed Nizin</h3>
+                    <div class="university">University of Technology Bahrain</div>
+                    <div class="course">Computer Science</div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Team Member 3 -->
+            <!-- Member 3 -->
             <div class="team-member">
                 <div class="member-photo">
-                    <img src="/api/placeholder/300/300" alt="Team member 3">
+                    <img src="images/Fayzea.jpg"alt="Team member 3">
                 </div>
                 <div class="member-info">
-                    <h3>Emily Zhang</h3>
-                    <div class="university">University of Technology Sydney</div>
-                    <div class="course">Bachelor of Science in Games Development</div>
+                    <h3>Fayeza Aqeel</h3>
+                    <div class="university">University of Technology Bahrain</div>
+                    <div class="course">Computer Science</div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Team Member 4 -->
+            <!-- Member 4 -->
             <div class="team-member">
                 <div class="member-photo">
-                    <img src="/api/placeholder/300/300" alt="Team member 4">
+                    <img src="images/Muhammed.jpg" alt="Team member 4">
                 </div>
                 <div class="member-info">
-                    <h3>David Wilson</h3>
-                    <div class="university">University of Technology Sydney</div>
-                    <div class="course">Bachelor of Computing Science</div>
+                    <h3>Muhammad Samama</h3>
+                    <div class="university">Arab Open University</div>
+                    <div class="course">Information Technology & Computing</div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <a href="index.html" class="nav-button prev">BACK</a>
+    <a href=".html" class="nav-button prev">BACK</a>
     <a href="nextpage.html" class="nav-button next">NEXT</a>
     <button class="theme-toggle" onclick="toggleTheme()">
         <i class="fas fa-sun"></i>
@@ -250,8 +290,8 @@
         function toggleTheme() {
             const root = document.documentElement;
             const isDark = root.style.getPropertyValue('--background-light') === '#2d3436';
-            root.style.setProperty('--background-light', isDark ? '#ffffff' : '#2d3436');
-            root.style.setProperty('--background-dark', isDark ? '#2d3436' : '#ffffff');
+            root.style.setProperty('--background-light', isDark ? '#f8f9fa' : '#2d3436');
+            root.style.setProperty('--background-dark', isDark ? '#2d3436' : '#f8f9fa');
             root.style.setProperty('--text-dark', isDark ? '#2d3436' : '#ffffff');
             root.style.setProperty('--text-white', isDark ? '#ffffff' : '#2d3436');
 

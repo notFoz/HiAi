@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        :root {
+            --primary-red: #ff6b6b;
+            --primary-blue: #4ecdc4;
+            --primary-green: #95e1d3;
+            --text-dark: #2d3436;
+            --text-light: #f5f6fa;
+            --background-light: #ffffff;
+            --background-dark: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-blue), var(--primary-green));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        body.dark-mode {
+            background: var(--background-dark);
+            color: var(--text-light);
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-text {
+            font-size: 22px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #2d3436;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: var(--text-light);
+        }
+
+        .form-container {
+            margin-bottom: 30px;
+        }
+
+        .form-container input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            background-color: var(--primary-blue);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--text-light);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .form-container button:hover {
+            transform: translateY(-2px);
+            background-color: var(--primary-green);
+        }
+
+        .display-area {
+            background-color: rgb(255, 255, 255);
+            border-radius: 20px;
+            padding: 20px; /* Reduced padding */
+            margin: 20px auto;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .display-area img {
+            width: 100%; /* Make the image fit the width of the container */
+            height: auto; /* Maintain the aspect ratio */
+            border-radius: 50px; /* Reduced border-radius */
+            max-width: 115%;
+            max-height: 115%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .nav-button {
+            position: fixed;
+            padding: 12px 24px;
+            border-radius: 20px;
+            background: var(--primary-red);
+            color: var(--text-light);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+            z-index: 100;
+            bottom: 20px;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            background: #e60000;
+        }
+
+        .nav-button.prev {
+            left: 20px;
+        }
+
+        .nav-button.next {
+            right: 20px;
+        }
+
+        .sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .sidebar-item {
+            background-color: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            width: 150px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="intro-text">
+            Hey kids! Enter a prompt below and see the magic happen!<br>
+            Let's generate an image based on your prompt:
+        </p>
+
+        <div class="form-container">
+            <input type="text" id="prompt-input" placeholder="Enter your prompt here..." list="suggestions">
+            <datalist id="suggestions">
+                <option value="How to Draw a Sun">
+                <option value="How to Draw a House">
+            </datalist>
+            <button onclick="generateImage()">Generate Image</button>
+        </div>
+
+        <div class="display-area" id="display-area">
+            <img id="generated-image" src="" alt="">
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-item">
+            <img src="images/qrcode_171223333_c15b68b8d85f85ac6859d37893ebff65.png" alt="QR Code" style="width: 100%; height: auto; margin-bottom: 10px;">
+            Claude AI
+        </div>
+    </div>
+
+    <a href="emotion.html" class="nav-button prev">BACK</a>
+    <a href="About Page.html" class="nav-button next">NEXT</a>
+
+    <script>
+        function generateImage() {
+            const promptInput = document.getElementById('prompt-input').value;
+            const generatedImage = document.getElementById('generated-image');
+            const displayArea = document.getElementById('display-area');
+
+            let imageUrl = '';
+
+            switch(promptInput) {
+                case 'How to Draw a Sun':
+                    imageUrl = 'images/How to draw a Sun.jpg'; // Replace with the actual path to your sun image
+                    break;
+                case 'How to Draw a House':
+                    imageUrl = 'images/How to draw a House.jpg'; // Replace with the actual path to your house image
+                    break;
+                default:
+                    imageUrl = 'https://via.placeholder.com/600x300?text=' + encodeURIComponent(promptInput);
+                    break;
+            }
+
+            generatedImage.src = imageUrl;
+            generatedImage.alt = promptInput;
+        }
+    </script>
+</body>
+</html>
